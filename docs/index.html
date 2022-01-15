@@ -1,0 +1,119 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>covid-certificate</title><meta name="description" content="Documentation for covid-certificate"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">covid-certificate</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>covid-certificate</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#digital-covid-certificate" id="digital-covid-certificate" style="color: inherit; text-decoration: none;">
+  <h1>Digital Covid Certificate</h1>
+</a>
+<p><img src="https://img.shields.io/npm/types/typescript" alt="typescript"></p>
+<p>This package will parse and verify a European Digital Covid Certificates (DCC). Certificates in the form
+of QR-codes are being handed down to all vaccinated, recovered or tested citizens of the European Union.</p>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>You can install this package by using your favourite package manager</p>
+<p><code>npm install covid-certificate --save</code></p>
+<p>This package only works in a nodejs environment, and not (yet) in the browser.</p>
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h2>Getting started</h2>
+</a>
+<p>This package can parse and verify the signature of digital covid certificate</p>
+
+<a href="#signature-verification" id="signature-verification" style="color: inherit; text-decoration: none;">
+  <h3>Signature verification</h3>
+</a>
+<p>To verify a certificate:</p>
+<pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">readCertificate</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-4">&quot;covid-certificate&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">cert</span><span class="hl-1"> = </span><span class="hl-3">readCertificate</span><span class="hl-1">(</span><span class="hl-4">&quot;HC1:your_certificate_from_QR_code_scanner&quot;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">verfificationResult</span><span class="hl-1"> = </span><span class="hl-3">verifySignature</span><span class="hl-1">(</span><span class="hl-6">cert</span><span class="hl-1">);</span><br/><br/><span class="hl-5">if</span><span class="hl-1"> (!</span><span class="hl-6">verfificationResult</span><span class="hl-1">.</span><span class="hl-3">isValid</span><span class="hl-1">()) {</span><br/><span class="hl-1">  </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-6">verfificationResult</span><span class="hl-1">.</span><span class="hl-3">getMessage</span><span class="hl-1">());</span><br/><span class="hl-1">}</span>
+</code></pre>
+
+<a href="#parsing-certificate" id="parsing-certificate" style="color: inherit; text-decoration: none;">
+  <h3>Parsing certificate</h3>
+</a>
+<p>Parsing the certificate will give you access to all the data inside the
+certificate. Before parsing it is recommended to verify the signature!</p>
+<pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">parse</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-4">&quot;covid-certificate&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">healthCertificate</span><span class="hl-1"> = </span><span class="hl-3">parse</span><span class="hl-1">(</span><span class="hl-4">&quot;HC1:certificate_data_from_QR_code&quot;</span><span class="hl-1">);</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-6">healthCertificate</span><span class="hl-1">);</span>
+</code></pre>
+
+<a href="#healthcertificate" id="healthcertificate" style="color: inherit; text-decoration: none;">
+  <h2>HealthCertificate</h2>
+</a>
+<p>The HealthCertificate contains the following data</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kid</td>
+<td>string</td>
+<td>The unique id of the issuer</td>
+</tr>
+<tr>
+<td>alg</td>
+<td>string</td>
+<td>The algorithm used to sign the certificate</td>
+</tr>
+<tr>
+<td>expirationDate</td>
+<td>Date</td>
+<td>Expiration date of certificate</td>
+</tr>
+<tr>
+<td>issuedAt</td>
+<td>Date</td>
+<td>Certificate issued at date</td>
+</tr>
+<tr>
+<td>dateOfBirth</td>
+<td>string</td>
+<td>Date of birth</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name of the person</td>
+</tr>
+<tr>
+<td>vaccinations</td>
+<td>array</td>
+<td>The vaccinations</td>
+</tr>
+<tr>
+<td>recovered</td>
+<td>array</td>
+<td>Recovery data</td>
+</tr>
+<tr>
+<td>tests</td>
+<td>array</td>
+<td>Test data</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Version</td>
+</tr>
+</tbody></table>
+
+<a href="#full-example" id="full-example" style="color: inherit; text-decoration: none;">
+  <h2>Full example</h2>
+</a>
+<p>Following full example will give you a guide on how to use this library.</p>
+<pre><code class="language-js"><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">readCertificate</span><span class="hl-1">, </span><span class="hl-6">parseCoseCertificate</span><span class="hl-1">, </span><span class="hl-6">verifySignature</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-4">&quot;covid-certificate&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">cert</span><span class="hl-1"> = </span><span class="hl-3">readCertificate</span><span class="hl-1">(</span><br/><span class="hl-1">  </span><span class="hl-4">&quot;HC1:6BF+70790T9WJWG.FKY*4GO0.O1CV2 O5 N2FBBRW1*70HS8WY04AC*WIFN0AHCD8KD97TK0F90KECTHGWJC0FDC:5AIA%G7X+AQB9746HS80:54IBQF60R6$A80X6S1BTYACG6M+9XG8KIAWNA91AY%67092L4WJCT3EHS8XJC +DXJCCWENF6OF63W5NW6WF6%JC QE/IAYJC5LEW34U3ET7DXC9 QE-ED8%E.JCBECB1A-:8$96646AL60A60S6Q$D.UDRYA 96NF6L/5QW6307KQEPD09WEQDD+Q6TW6FA7C466KCN9E%961A6DL6FA7D46JPCT3E5JDLA7$Q6E464W5TG6..DX%DZJC6/DTZ9 QE5$CB$DA/D JC1/D3Z8WED1ECW.CCWE.Y92OAGY8MY9L+9MPCG/D5 C5IA5N9$PC5$CUZCY$5Y$527BHB6*L8ARHDJL.Q7*2T7:SCNFZN70H6*AS6+T$D9UCAD97R8NIBO+/RJVE$9PAGPTBIZEP MO-Q0:R13IURRQ5MV93M9V3X2U:NDZSF&quot;</span><br/><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">verfificationResult</span><span class="hl-1"> = </span><span class="hl-3">verifySignature</span><span class="hl-1">(</span><span class="hl-6">cert</span><span class="hl-1">);</span><br/><br/><span class="hl-5">if</span><span class="hl-1"> (!</span><span class="hl-6">verfificationResult</span><span class="hl-1">.</span><span class="hl-3">isValid</span><span class="hl-1">()) {</span><br/><span class="hl-1">  </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-6">verfificationResult</span><span class="hl-1">.</span><span class="hl-3">getMessage</span><span class="hl-1">())</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">healthCertificate</span><span class="hl-1"> = </span><span class="hl-3">parseCoseCertificate</span><span class="hl-1">(</span><span class="hl-6">cert</span><span class="hl-1">)</span><br/><br/><span class="hl-7">// Display vaccination information</span><br/><span class="hl-5">if</span><span class="hl-1"> (</span><span class="hl-6">healthCertificate</span><span class="hl-1">.</span><span class="hl-6">vaccinations</span><span class="hl-1">.</span><span class="hl-6">length</span><span class="hl-1"> &gt; </span><span class="hl-8">0</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-6">healthCertificate</span><span class="hl-1">.</span><span class="hl-6">vaccinations</span><span class="hl-1">[</span><span class="hl-8">0</span><span class="hl-1">]);</span><br/><span class="hl-1">}</span><br/>
+</code></pre>
+<p>will display</p>
+<pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;target&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;COVID-19&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;vaccineType&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;MRNA&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;medicinalProduct&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;EU/1/20/1507&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;manufacturer&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;ORG-100031184&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;doseNumber&quot;</span><span class="hl-1">: </span><span class="hl-8">1</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;totalDoses&quot;</span><span class="hl-1">: </span><span class="hl-8">2</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;date&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;2021-05-29&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;country&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;DE&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;issuer&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;Robert Koch-Institut&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-9">&quot;id&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W&quot;</span><br/><span class="hl-1">}</span>
+</code></pre>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h2>Documentation</h2>
+</a>
+<p>Full documentation of the library can be found in the docs directory.</p>
+
+<a href="#author" id="author" style="color: inherit; text-decoration: none;">
+  <h2>Author</h2>
+</a>
+<p>This library is written by Benno Tielen. Contributions are welcome!</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-enum"><a href="enums/Algorithm.html" class="tsd-kind-icon">Algorithm</a></li><li class="tsd-kind-enum"><a href="enums/Target.html" class="tsd-kind-icon">Target</a></li><li class="tsd-kind-enum"><a href="enums/TestResult.html" class="tsd-kind-icon">Test<wbr/>Result</a></li><li class="tsd-kind-enum"><a href="enums/VaccineType.html" class="tsd-kind-icon">Vaccine<wbr/>Type</a></li><li class="tsd-kind-class"><a href="classes/SingleSignedMessage.html" class="tsd-kind-icon">Single<wbr/>Signed<wbr/>Message</a></li><li class="tsd-kind-class"><a href="classes/Valid.html" class="tsd-kind-icon">Valid</a></li><li class="tsd-kind-class"><a href="classes/VerificationError.html" class="tsd-kind-icon">Verification<wbr/>Error</a></li><li class="tsd-kind-class"><a href="classes/VerificationResult.html" class="tsd-kind-icon">Verification<wbr/>Result</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CosePayload" class="tsd-kind-icon">Cose<wbr/>Payload</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CoseProtectedHeaders" class="tsd-kind-icon">Cose<wbr/>Protected<wbr/>Headers</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CoseSignature" class="tsd-kind-icon">Cose<wbr/>Signature</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CoseUnprotectedHeaders" class="tsd-kind-icon">Cose<wbr/>Unprotected<wbr/>Headers</a></li><li class="tsd-kind-type-alias"><a href="modules.html#HealthCertificate" class="tsd-kind-icon">Health<wbr/>Certificate</a></li><li class="tsd-kind-type-alias"><a href="modules.html#Name" class="tsd-kind-icon">Name</a></li><li class="tsd-kind-type-alias"><a href="modules.html#RecoveredCertificate" class="tsd-kind-icon">Recovered<wbr/>Certificate</a></li><li class="tsd-kind-type-alias"><a href="modules.html#TestCertificate" class="tsd-kind-icon">Test<wbr/>Certificate</a></li><li class="tsd-kind-type-alias"><a href="modules.html#VaccinationCertificate" class="tsd-kind-icon">Vaccination<wbr/>Certificate</a></li><li class="tsd-kind-function"><a href="modules.html#parse" class="tsd-kind-icon">parse</a></li><li class="tsd-kind-function"><a href="modules.html#parseCoseCertificate" class="tsd-kind-icon">parse<wbr/>Cose<wbr/>Certificate</a></li><li class="tsd-kind-function"><a href="modules.html#readCertificate" class="tsd-kind-icon">read<wbr/>Certificate</a></li><li class="tsd-kind-function"><a href="modules.html#verifySignature" class="tsd-kind-icon">verify<wbr/>Signature</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
