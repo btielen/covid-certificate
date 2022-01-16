@@ -1,6 +1,7 @@
 # Digital Covid Certificate
 
 ![typescript](https://img.shields.io/npm/types/typescript)
+![node](https://img.shields.io/node/v/covid-certificate)
 
 This package will parse and verify a European Digital Covid Certificates (DCC). Certificates in the form
 of QR-codes are being handed down to all vaccinated, recovered or tested citizens of the European Union.
