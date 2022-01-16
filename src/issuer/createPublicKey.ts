@@ -1,16 +1,10 @@
 import { IssuerCertificateData } from "./certificates";
-import { KeyObject, X509Certificate } from "crypto";
+import * as x509 from "@peculiar/x509";
 
 export const createPublicKey = (
   issuerCertificate: IssuerCertificateData
-): KeyObject => {
-  const cert = new X509Certificate(addPEMTags(issuerCertificate.rawData));
+): ArrayBuffer => {
+  const cert2 = new x509.X509Certificate(issuerCertificate.rawData);
 
-  return cert.publicKey;
-};
-
-const addPEMTags = (certificate: string): string => {
-  return `-----BEGIN CERTIFICATE-----
-${certificate}
------END CERTIFICATE-----`;
+  return cert2.publicKey.rawData;
 };

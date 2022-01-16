@@ -1,35 +1,27 @@
 import { SingleSignedMessage } from "./SingleSignedMessage";
-import { ec as EC } from "elliptic";
 import { encode } from "cbor";
-import { createHash, KeyObject } from "crypto";
+import { Crypto } from "@peculiar/webcrypto";
 
 class ECDS256SignatureVerifier {
-  verify(message: SingleSignedMessage, publicKey: KeyObject) {
+  async verify(message: SingleSignedMessage, publicKey: ArrayBuffer) {
     const ToBeSigned = encode(message.toSign());
 
-    // Hash
-    const hash = createHash("sha256");
-    hash.update(ToBeSigned);
-    const msgHash = hash.digest();
+    const crypto = new Crypto();
 
-    // Elliptic curve
-    const ec = new EC("p256");
+    const pk = await crypto.subtle.importKey(
+      "spki",
+      publicKey,
+      { name: "ECDSA", namedCurve: "P-256" },
+      true,
+      ["verify"]
+    );
 
-    // Elliptic curve expects a public key object { x: string, y: string }
-    // with hex encoded strings
-    const pk = publicKey.export({ format: "jwk" });
-    const key = ec.keyFromPublic({
-      x: Buffer.from(pk.x + "=", "base64").toString("hex"),
-      y: Buffer.from(pk.y + "=", "base64").toString("hex"),
-    });
-
-    const expectedSignature = message.getSignature();
-    const sig = {
-      r: expectedSignature.slice(0, expectedSignature.length / 2),
-      s: expectedSignature.slice(expectedSignature.length / 2),
-    };
-
-    return key.verify(msgHash, sig);
+    return await crypto.subtle.verify(
+      { name: "ECDSA", hash: "SHA-256" },
+      pk,
+      message.getSignature(),
+      ToBeSigned
+    );
   }
 }
 

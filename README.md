@@ -12,7 +12,26 @@ You can install this package by using your favourite package manager
 
 `npm install covid-certificate --save`
 
-This package only works in a nodejs environment, and not (yet) in the browser.
+### Webpack >= 5.0
+
+Webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. You will need to install and configure the polyfills
+yourself if you are using this package in the browser. For example by using the `node-polyfill-webpack-plugin`
+
+`npm install node-polyfill-webpack-plugin`
+
+configure `webpack.config.js`
+
+```js
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+
+module.exports = {
+	// Other rules...
+	plugins: [
+          new NodePolyfillPlugin()
+	]
+}
+```
 
 ## Getting started
 
