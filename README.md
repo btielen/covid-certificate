@@ -105,7 +105,7 @@ will display
 
 ## Documentation
 
-Full documentation of the library can be found in the docs directory.
+Full documentation of the library can be found [here](https://btielen.github.io/covid-certificate/)
 
 ## Author
 
