@@ -1,6 +1,8 @@
 # Digital Covid Certificate
 
 ![typescript](https://img.shields.io/npm/types/typescript)
+![licence](https://img.shields.io/npm/l/covid-certificate)
+![version](https://img.shields.io/npm/v/covid-certificate)
 ![node](https://img.shields.io/node/v/covid-certificate)
 
 This package will parse and verify a European Digital Covid Certificates (DCC). Certificates in the form
@@ -75,7 +77,7 @@ The HealthCertificate contains the following data
 | expirationDate | Date   | Expiration date of certificate             |
 | issuedAt       | Date   | Certificate issued at date                 |
 | dateOfBirth    | string | Date of birth                              |
-| name           | string | Name of the person                         |
+| name           | object | Name of the person                         |
 | vaccinations   | array  | The vaccinations                           |
 | recovered      | array  | Recovery data                              |
 | tests          | array  | Test data                                  |
