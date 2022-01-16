@@ -17,7 +17,7 @@ class ECDS256SignatureVerifier {
     );
 
     return await crypto.subtle.verify(
-      { name: "ECDSA", hash: "SHA-256" },
+      { name: "ECDSA", hash: "sha-256" },
       pk,
       message.getSignature(),
       ToBeSigned
